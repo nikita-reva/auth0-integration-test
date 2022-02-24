@@ -37,8 +37,6 @@ const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
   // We can can use util function to generate id token to match OIDC so that we can use
   // our custom id provider in Flex
 
-  console.log(profile);
-
   const locale = Object.keys(profile._json.firstName.localized)[0];
 
   const firstName = profile._json.firstName.localized[locale];
