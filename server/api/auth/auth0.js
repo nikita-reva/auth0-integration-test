@@ -41,11 +41,15 @@ const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
   // We can can use util function to generate id token to match OIDC so that we can use
   // our custom id provider in Flex
 
-  const locale = Object.keys(profile._json.firstName.localized)[0];
+  // const locale = Object.keys(profile._json.firstName.localized)[0];
 
-  const firstName = profile._json.firstName.localized[locale];
-  const lastName = profile._json.lastName.localized[locale];
-  const email = profile.emails[0].value;
+  // const firstName = profile._json.firstName.localized[locale];
+  // const lastName = profile._json.lastName.localized[locale];
+  // const email = profile.emails[0].value;
+
+  const firstName = 'Niko';
+  const lastName = 'Reva';
+  const email = 'aniketosreva@gmail.com';
 
   // LikedIn API doesn't return information if the email is verified or not directly.
   // However, it seems that with OAUTH2 flow authentication is not possible if the email is not verified.
