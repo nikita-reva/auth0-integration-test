@@ -116,7 +116,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
   console.log('authenticateAuth0Callback');
-  // passport.authenticate('auth0', function(err, user) {
-  //   loginWithIdp(err, user, req, res, idpClientId, idpId);
-  // })(req, res, next);
+  passport.authenticate('auth0', function(err, user) {
+    loginWithIdp(err, user, req, res, idpClientId, idpId);
+  })(req, res, next);
 };
