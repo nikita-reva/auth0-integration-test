@@ -28,7 +28,6 @@ const strategyOptions = {
   clientSecret,
   domain,
   callbackURL,
-  scope: ['r_emailaddress', 'r_liteprofile'],
   passReqToCallback: true,
   state: false,
 };
