@@ -232,6 +232,8 @@ export class AuthenticationPageComponent extends Component {
     const authWithGoogle = () => {
       const defaultRoutes = getDefaultRoutes();
       const { baseUrl, fromParam, defaultReturnParam, defaultConfirmParam } = defaultRoutes;
+      console.log(defaultRoutes);
+
       window.location.href = `${baseUrl}/api/auth/google?${fromParam}${defaultReturnParam}${defaultConfirmParam}`;
     };
 
