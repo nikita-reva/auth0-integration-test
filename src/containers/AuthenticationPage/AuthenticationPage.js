@@ -317,6 +317,7 @@ export class AuthenticationPageComponent extends Component {
             </SocialLoginButton>
           </div>
         ) : null}
+
         {showAuth0Login ? (
           <div className={css.socialButtonWrapper}>
             <SocialLoginButton onClick={() => authWithAuth0()}>

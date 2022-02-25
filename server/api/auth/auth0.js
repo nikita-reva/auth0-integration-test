@@ -34,54 +34,55 @@ const strategyOptions = {
 };
 
 const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
-  // We can can use util function to generate id token to match OIDC so that we can use
-  // our custom id provider in Flex
+  console.log('verifyCallback');
+  // // We can can use util function to generate id token to match OIDC so that we can use
+  // // our custom id provider in Flex
 
-  const locale = Object.keys(profile._json.firstName.localized)[0];
+  // const locale = Object.keys(profile._json.firstName.localized)[0];
 
-  const firstName = profile._json.firstName.localized[locale];
-  const lastName = profile._json.lastName.localized[locale];
-  const email = profile.emails[0].value;
+  // const firstName = profile._json.firstName.localized[locale];
+  // const lastName = profile._json.lastName.localized[locale];
+  // const email = profile.emails[0].value;
 
-  // LikedIn API doesn't return information if the email is verified or not directly.
-  // However, it seems that with OAUTH2 flow authentication is not possible if the email is not verified.
-  // There is no official documentation about this, but through testing it seems like this can be trusted
-  // For reference: https://stackoverflow.com/questions/19278201/oauth-request-verified-email-address-from-linkedin
+  // // LikedIn API doesn't return information if the email is verified or not directly.
+  // // However, it seems that with OAUTH2 flow authentication is not possible if the email is not verified.
+  // // There is no official documentation about this, but through testing it seems like this can be trusted
+  // // For reference: https://stackoverflow.com/questions/19278201/oauth-request-verified-email-address-from-linkedin
 
-  const user = {
-    userId: profile.id,
-    firstName,
-    lastName,
-    email,
-    emailVerified: true,
-  };
+  // const user = {
+  //   userId: profile.id,
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   emailVerified: true,
+  // };
 
-  const state = req.query.state;
-  const queryParams = JSON.parse(state);
+  // const state = req.query.state;
+  // const queryParams = JSON.parse(state);
 
-  const { from, defaultReturn, defaultConfirm } = queryParams;
+  // const { from, defaultReturn, defaultConfirm } = queryParams;
 
-  // These keys are used for signing the ID token (JWT)
-  // When you store them to environment variables you should replace
-  // any line brakes with '\n'.
-  // You should also make sure that the key size is big enough.
-  const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
-  const keyId = process.env.REACT_APP_AUTH0_KEY_ID;
+  // // These keys are used for signing the ID token (JWT)
+  // // When you store them to environment variables you should replace
+  // // any line brakes with '\n'.
+  // // You should also make sure that the key size is big enough.
+  // const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
+  // const keyId = process.env.REACT_APP_AUTH0_KEY_ID;
 
-  createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
-    .then(idpToken => {
-      const userData = {
-        email,
-        firstName,
-        lastName,
-        idpToken,
-        from,
-        defaultReturn,
-        defaultConfirm,
-      };
-      done(null, userData);
-    })
-    .catch(e => console.error(e));
+  // createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
+  //   .then(idpToken => {
+  //     const userData = {
+  //       email,
+  //       firstName,
+  //       lastName,
+  //       idpToken,
+  //       from,
+  //       defaultReturn,
+  //       defaultConfirm,
+  //     };
+  //     done(null, userData);
+  //   })
+  //   .catch(e => console.error(e));
 };
 
 // ClientId is required when adding a new Linkedin strategy to passport
@@ -90,9 +91,13 @@ if (clientID) {
 }
 
 exports.authenticateAuth0 = (req, res, next) => {
+  console.log('authenticateAuth0');
   const from = req.query.from ? req.query.from : null;
   const defaultReturn = req.query.defaultReturn ? req.query.defaultReturn : null;
   const defaultConfirm = req.query.defaultConfirm ? req.query.defaultConfirm : null;
+  console.log(from);
+  console.log(defaultReturn);
+  console.log(defaultConfirm);
 
   const params = {
     ...(!!from && { from }),
@@ -110,7 +115,8 @@ exports.authenticateAuth0 = (req, res, next) => {
 // Use custom callback for calling loginWithIdp enpoint
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
-  passport.authenticate('auth0', function(err, user) {
-    loginWithIdp(err, user, req, res, idpClientId, idpId);
-  })(req, res, next);
+  console.log('authenticateAuth0Callback');
+  // passport.authenticate('auth0', function(err, user) {
+  //   loginWithIdp(err, user, req, res, idpClientId, idpId);
+  // })(req, res, next);
 };
