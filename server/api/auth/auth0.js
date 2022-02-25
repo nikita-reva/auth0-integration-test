@@ -98,9 +98,6 @@ exports.authenticateAuth0 = (req, res, next) => {
   const from = req.query.from ? req.query.from : null;
   const defaultReturn = req.query.defaultReturn ? req.query.defaultReturn : null;
   const defaultConfirm = req.query.defaultConfirm ? req.query.defaultConfirm : null;
-  console.log(from);
-  console.log(defaultReturn);
-  console.log(defaultConfirm);
 
   const params = {
     ...(!!from && { from }),
