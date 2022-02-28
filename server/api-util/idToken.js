@@ -64,6 +64,8 @@ exports.createIdToken = (idpClientId, user, options) => {
     .setExpirationTime('1h')
     .sign(privateKey);
 
+  console.log(jwt);
+
   return jwt;
 };
 
