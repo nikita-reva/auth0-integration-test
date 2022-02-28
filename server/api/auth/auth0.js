@@ -47,9 +47,9 @@ const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
   // const lastName = profile._json.lastName.localized[locale];
   // const email = profile.emails[0].value;
 
-  const firstName = 'Nikita';
-  const lastName = 'Reva';
-  const email = 'n.reva@gmx.de';
+  const firstName = '';
+  const lastName = '';
+  const email = '';
 
   // LikedIn API doesn't return information if the email is verified or not directly.
   // However, it seems that with OAUTH2 flow authentication is not possible if the email is not verified.

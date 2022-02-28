@@ -8,17 +8,6 @@ import { FormattedMessage, injectIntl, intlShape } from '../../../util/reactIntl
 import * as validators from '../../../util/validators';
 import { Form, PrimaryButton, FieldTextInput, NamedLink } from '../../../components';
 
-import { useAuth0 } from '@auth0/auth0-react';
-
-const Auth0LoginButton = () => {
-  const { loginWithRedirect } = useAuth0();
-  return (
-    <button className="btn btn-primary btn-block" onClick={() => loginWithRedirect()}>
-      Log In
-    </button>
-  );
-};
-
 import css from './LoginForm.module.css';
 
 const LoginFormComponent = props => (
@@ -109,7 +98,6 @@ const LoginFormComponent = props => (
               <FormattedMessage id="LoginForm.logIn" />
             </PrimaryButton>
           </div>
-          <Auth0LoginButton />
         </Form>
       );
     }}
