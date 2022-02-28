@@ -32,7 +32,7 @@ const strategyOptions = {
   state: false,
 };
 
-const verifyCallback = (req, accessToken, refreshToken, profile, done) => {
+const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
   console.log('verifyCallback');
   console.log(profile);
   console.log('accessToken: ' + accessToken);
