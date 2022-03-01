@@ -48,7 +48,7 @@ import LoginForm from './LoginForm/LoginForm';
 import SignupForm from './SignupForm/SignupForm';
 
 import css from './AuthenticationPage.module.css';
-import { FacebookLogo, GoogleLogo } from './socialLoginLogos';
+import { FacebookLogo, GoogleLogo, Auth0Logo } from './socialLoginLogos';
 
 export class AuthenticationPageComponent extends Component {
   constructor(props) {
@@ -323,7 +323,7 @@ export class AuthenticationPageComponent extends Component {
         {showAuth0Login ? (
           <div className={css.socialButtonWrapper}>
             <SocialLoginButton onClick={() => authWithAuth0()}>
-              <span className={css.buttonIcon}>{GoogleLogo}</span>
+              <span className={css.buttonIcon}>{Auth0Logo}</span>
               {auth0ButtonText}
             </SocialLoginButton>
           </div>
