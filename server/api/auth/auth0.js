@@ -74,7 +74,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // any line brakes with '\n'.
   // You should also make sure that the key size is big enough.
   const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
-  const keyId = process.env.REACT_APP_AUTH0_KEY_ID;
+  const keyId = process.env.AUTH0_KEY_ID;
 
   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
     .then(idpToken => {
