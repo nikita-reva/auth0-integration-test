@@ -36,7 +36,7 @@ export const GoogleLogo = (
   </svg>
 );
 
-// This is Google's logo, you are not allowed to change its color
+// This is Auth0's logo, you are not allowed to change its color
 export const Auth0Logo = (
   <svg
     width="20"
