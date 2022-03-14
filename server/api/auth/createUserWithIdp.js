@@ -58,6 +58,11 @@ module.exports = (req, res) => {
       ? AUTH0_PROXY_CLIENT_ID
       : null;
 
+  console.log('From create new user:');
+  console.log(idpId);
+  console.log(idpClientId);
+  console.log(idpToken);
+
   sdk.currentUser
     .createWithIdp({ idpId, idpClientId, idpToken, ...rest })
     .then(() =>
