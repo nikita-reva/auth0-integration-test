@@ -86,6 +86,11 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
     ...baseUrl,
   });
 
+  console.log('From login:');
+  console.log(idpId);
+  console.log(idpClientId);
+  console.log(user.idpToken);
+
   return sdk
     .loginWithIdp({
       idpId,
@@ -98,8 +103,6 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
         // We need to add # to the end of the URL because otherwise Facebook
         // login will add their defaul #_#_ which breaks the routing in frontend.
 
-        console.log(response);
-
         if (from) {
           res.redirect(`${rootUrl}${from}#`);
         } else {
@@ -111,7 +114,6 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
       console.log(
         'Authenticating with idp failed. User needs to confirm creating sign up in frontend.'
       );
-      console.log(response);
 
       // If authentication fails, we want to create a new user with idp
       // For this we will need to pass some information to frontend so
