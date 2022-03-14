@@ -22,9 +22,6 @@ const baseUrl = BASE_URL ? { baseUrl: BASE_URL } : {};
 
 module.exports = (err, user, req, res, idpClientId, idpId) => {
   console.log('Call: loginWithIdp');
-  console.log(user);
-  console.log(idpClientId);
-  console.log(idpId);
 
   if (err) {
     log.error(err, 'fetching-user-data-from-idp-failed');
@@ -110,10 +107,11 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
         }
       }
     })
-    .catch(() => {
+    .catch(response => {
       console.log(
         'Authenticating with idp failed. User needs to confirm creating sign up in frontend.'
       );
+      console.log(response);
 
       // If authentication fails, we want to create a new user with idp
       // For this we will need to pass some information to frontend so
