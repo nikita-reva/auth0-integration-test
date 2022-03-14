@@ -33,7 +33,7 @@ const strategyOptions = {
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
-  console.log('verifyCallback');
+  console.log('Call: auth0/verifyCallback');
   console.log(profile);
   console.log('accessToken: ' + accessToken);
   console.log('refreshToken: ' + refreshToken);
@@ -74,7 +74,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // any line brakes with '\n'.
   // You should also make sure that the key size is big enough.
   const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
-  const keyId = process.env.AUTH0_KEY_ID;
+  const keyId = process.env.KEY_ID;
 
   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
     .then(idpToken => {
@@ -98,7 +98,7 @@ if (clientID) {
 }
 
 exports.authenticateAuth0 = (req, res, next) => {
-  console.log('authenticateAuth0');
+  console.log('Call: auth0/authenticateAuth0');
   const from = req.query.from ? req.query.from : null;
   const defaultReturn = req.query.defaultReturn ? req.query.defaultReturn : null;
   const defaultConfirm = req.query.defaultConfirm ? req.query.defaultConfirm : null;
@@ -119,7 +119,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 // Use custom callback for calling loginWithIdp enpoint
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
-  console.log('authenticateAuth0Callback');
+  console.log('auth0/authenticateAuth0Callback');
   passport.authenticate('auth0', function(err, user) {
     loginWithIdp(err, user, req, res, idpClientId, idpId);
   })(req, res, next);
