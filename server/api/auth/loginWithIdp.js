@@ -110,7 +110,7 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
         }
       }
     })
-    .catch(response => {
+    .catch(() => {
       console.log(
         'Authenticating with idp failed. User needs to confirm creating sign up in frontend.'
       );

@@ -63,18 +63,11 @@ module.exports = (req, res) => {
     .then(() =>
       // After the user is created, we need to call loginWithIdp endpoint
       // so that the user will be logged in.
-      {
-        console.log('From create new user:');
-        console.log(idpId);
-        console.log(idpClientId);
-        console.log(idpToken);
-
-        sdk.loginWithIdp({
-          idpId,
-          idpClientId: `${idpClientId}`,
-          idpToken: `${idpToken}`,
-        });
-      }
+      sdk.loginWithIdp({
+        idpId,
+        idpClientId: `${idpClientId}`,
+        idpToken: `${idpToken}`,
+      })
     )
     .then(apiResponse => {
       const { status, statusText, data } = apiResponse;

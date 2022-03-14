@@ -119,7 +119,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 // Use custom callback for calling loginWithIdp enpoint
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
-  console.log('auth0/authenticateAuth0Callback');
+  console.log('Call: auth0/authenticateAuth0Callback');
   passport.authenticate('auth0', function(err, user) {
     loginWithIdp(err, user, req, res, idpClientId, idpId);
   })(req, res, next);
