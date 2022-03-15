@@ -29,7 +29,7 @@ const strategyOptions = {
   domain,
   callbackURL,
   passReqToCallback: true,
-  state: false,
+  state: true,
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
