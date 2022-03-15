@@ -81,7 +81,6 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
     .then(idpToken => {
       const userData = {
         email,
-        emailVerified: true,
         firstName,
         lastName,
         idpToken,
@@ -114,6 +113,7 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
+    scope: 'openid email profile',
     state: paramsAsString,
   })(req, res, next);
 };
