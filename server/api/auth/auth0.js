@@ -47,6 +47,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // const lastName = profile._json.lastName.localized[locale];
   // const email = profile.emails[0].value;
 
+  const userId = '123';
   const firstName = 'Neko';
   const lastName = 'Reva';
   const email = 'n.reva@gmx.de';
@@ -57,7 +58,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // For reference: https://stackoverflow.com/questions/19278201/oauth-request-verified-email-address-from-linkedin
 
   const user = {
-    userId: profile.id,
+    userId,
     firstName,
     lastName,
     email,
@@ -80,6 +81,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
     .then(idpToken => {
       const userData = {
         email,
+        emailVerified: true,
         firstName,
         lastName,
         idpToken,
