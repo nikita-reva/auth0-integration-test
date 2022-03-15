@@ -66,7 +66,6 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   };
 
   const state = req.query.state;
-  console.log(state);
 
   const queryParams = JSON.parse(state);
 
@@ -115,7 +114,6 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
-    scope: 'profile',
     state: paramsAsString,
   })(req, res, next);
 };
