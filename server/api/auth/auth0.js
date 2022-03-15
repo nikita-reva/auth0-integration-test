@@ -29,7 +29,6 @@ const strategyOptions = {
   domain,
   callbackURL,
   passReqToCallback: true,
-  state: false,
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
@@ -121,8 +120,6 @@ exports.authenticateAuth0 = (req, res, next) => {
 exports.authenticateAuth0Callback = (req, res, next) => {
   console.log('Call: auth0/authenticateAuth0Callback');
   passport.authenticate('auth0', function(err, user) {
-    console.log('From authenticate');
-    console.log(user);
     loginWithIdp(err, user, req, res, idpClientId, idpId);
   })(req, res, next);
 };
