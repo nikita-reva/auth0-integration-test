@@ -66,6 +66,8 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   };
 
   const state = req.query.state;
+  console.log(state);
+
   const queryParams = JSON.parse(state);
 
   const { from, defaultReturn, defaultConfirm } = queryParams;
