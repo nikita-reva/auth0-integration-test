@@ -112,7 +112,7 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
-    scope: 'openid email profile',
+    scope: 'email profile',
     state: paramsAsString,
   })(req, res, next);
 };
