@@ -30,6 +30,7 @@ const strategyOptions = {
   callbackURL,
   passReqToCallback: true,
   state: false,
+  scope: 'email profile',
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
@@ -64,7 +65,6 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   };
 
   const state = req.query.state;
-
   const queryParams = JSON.parse(state);
 
   const { from, defaultReturn, defaultConfirm } = queryParams;
