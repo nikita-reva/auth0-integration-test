@@ -30,12 +30,14 @@ const strategyOptions = {
   callbackURL,
   passReqToCallback: true,
   state: false,
-  scope: 'email profile',
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
   console.log('Call: auth0/verifyCallback');
   console.log(profile);
+  console.log('Refresh Token:', refreshToken);
+  console.log('Access Token:', accessToken);
+  console.log('Extra Params:', extraParams);
 
   // We can can use util function to generate id token to match OIDC so that we can use
   // our custom id provider in Flex
@@ -46,7 +48,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // const lastName = profile._json.lastName.localized[locale];
   // const email = profile.emails[0].value;
 
-  const userId = refreshToken;
+  const userId = '';
   const firstName = '';
   const lastName = '';
   const email = '';
