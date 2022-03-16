@@ -46,7 +46,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // const lastName = profile._json.lastName.localized[locale];
   // const email = profile.emails[0].value;
 
-  const userId = accessToken;
+  const userId = refreshToken;
   const firstName = '';
   const lastName = '';
   const email = '';
