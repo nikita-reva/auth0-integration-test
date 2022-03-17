@@ -89,6 +89,8 @@ const session = {
   saveUninitialized: false,
 };
 
+const useDevApiServer = process.env.NODE_ENV === 'development';
+
 if (!useDevApiServer === 'production') {
   // Serve secure cookies, requires HTTPS
   session.cookie.secure = true;
