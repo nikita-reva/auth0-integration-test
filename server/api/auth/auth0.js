@@ -110,6 +110,8 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
+    scope: ['https://fave-stage.us.auth0.com/userinfo'],
+    audience: 'https://fave-stage.us.auth0.com/userinfo',
     state: paramsAsString,
   })(req, res, next);
 };
