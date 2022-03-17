@@ -1,6 +1,5 @@
 const passport = require('passport');
 const Auth0Strategy = require('passport-auth0');
-const OpenIDConnectStrategy = require('passport-openidconnect');
 const loginWithIdp = require('./loginWithIdp');
 const { createIdToken } = require('../../api-util/idToken');
 
@@ -25,21 +24,16 @@ if (useDevApiServer) {
 }
 
 const strategyOptions = {
-  issuer: 'https://' + domain + '/',
-  authorizationURL: 'https://' + domain + '/authorize',
-  tokenURL: 'https://' + domain + '/oauth/token',
-  userInfoURL: 'https://' + domain + '/userinfo',
   clientID,
   clientSecret,
+  domain,
   callbackURL,
-  scope: ['profile'],
   passReqToCallback: true,
   state: false,
 };
 
-const verifyCallback = (req, issuer, profile, cb) => {
+const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
   console.log('Call: auth0/verifyCallback');
-  console.log(issuer);
   console.log(profile);
   // We can can use util function to generate id token to match OIDC so that we can use
   // our custom id provider in Flex
@@ -91,14 +85,14 @@ const verifyCallback = (req, issuer, profile, cb) => {
         defaultReturn,
         defaultConfirm,
       };
-      cb(null, userData);
+      done(null, userData);
     })
     .catch(e => console.error(e));
 };
 
 // ClientId is required when adding a new Linkedin strategy to passport
 if (clientID) {
-  passport.use(new OpenIDConnectStrategy(strategyOptions, verifyCallback));
+  passport.use(new Auth0Strategy(strategyOptions, verifyCallback));
 }
 
 exports.authenticateAuth0 = (req, res, next) => {
@@ -115,7 +109,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 
   const paramsAsString = JSON.stringify(params);
 
-  passport.authenticate('openidconnect', {
+  passport.authenticate('auth0', {
     state: paramsAsString,
   })(req, res, next);
 };
@@ -124,7 +118,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
   console.log('Call: auth0/authenticateAuth0Callback');
-  passport.authenticate('openidconnect', function(err, user) {
+  passport.authenticate('auth0', function(err, user) {
     loginWithIdp(err, user, req, res, idpClientId, idpId);
   })(req, res, next);
 };
