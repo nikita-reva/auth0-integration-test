@@ -34,6 +34,7 @@ const strategyOptions = {
   callbackURL,
   scope: ['profile'],
   passReqToCallback: true,
+  state: false,
 };
 
 const verifyCallback = (req, issuer, profile, cb) => {
