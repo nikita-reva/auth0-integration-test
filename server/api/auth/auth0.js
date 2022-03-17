@@ -114,7 +114,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 
   const paramsAsString = JSON.stringify(params);
 
-  passport.authenticate('auth0', {
+  passport.authenticate('openidconnect', {
     state: paramsAsString,
   })(req, res, next);
 };
@@ -123,7 +123,7 @@ exports.authenticateAuth0 = (req, res, next) => {
 // to log in the user to Flex with the data from Linkedin
 exports.authenticateAuth0Callback = (req, res, next) => {
   console.log('Call: auth0/authenticateAuth0Callback');
-  passport.authenticate('auth0', function(err, user) {
+  passport.authenticate('openidconnect', function(err, user) {
     loginWithIdp(err, user, req, res, idpClientId, idpId);
   })(req, res, next);
 };
