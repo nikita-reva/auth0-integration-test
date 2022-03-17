@@ -86,11 +86,6 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
     ...baseUrl,
   });
 
-  console.log('From login:');
-  console.log(idpId);
-  console.log(idpClientId);
-  console.log(user.idpToken);
-
   return sdk
     .loginWithIdp({
       idpId,
@@ -102,7 +97,6 @@ module.exports = (err, user, req, res, idpClientId, idpId) => {
         // If the user was authenticated, redirect back to to LandingPage
         // We need to add # to the end of the URL because otherwise Facebook
         // login will add their defaul #_#_ which breaks the routing in frontend.
-        console.log(response);
 
         if (from) {
           res.redirect(`${rootUrl}${from}#`);
