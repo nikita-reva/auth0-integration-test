@@ -89,8 +89,6 @@ const session = {
   saveUninitialized: false,
 };
 
-const useDevApiServer = process.env.NODE_ENV === 'development';
-
 if (!useDevApiServer === 'production') {
   // Serve secure cookies, requires HTTPS
   session.cookie.secure = true;
@@ -173,9 +171,7 @@ if (!dev) {
 // Passport is authentication middleware for Node.js
 // We use passport to enable authenticating with
 // a 3rd party identity provider (e.g. Facebook or Google)
-app.use(expressSession(session));
 app.use(passport.initialize());
-app.use(passport.session());
 
 // Server-side routes that do not render the application
 app.use('/api', apiRouter);
