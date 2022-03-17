@@ -85,7 +85,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
         defaultReturn,
         defaultConfirm,
       };
-      done(null, userData);
+      done(null, profile);
     })
     .catch(e => console.error(e));
 };
@@ -110,8 +110,6 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
-    scope: ['https://fave-stage.us.auth0.com/userinfo'],
-    audience: 'https://fave-stage.us.auth0.com/userinfo',
     state: paramsAsString,
   })(req, res, next);
 };
