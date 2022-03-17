@@ -29,7 +29,7 @@ const strategyOptions = {
   domain,
   callbackURL,
   passReqToCallback: true,
-  state: false,
+  state: true,
 };
 
 const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, done) => {
@@ -93,6 +93,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
 // ClientId is required when adding a new Linkedin strategy to passport
 if (clientID) {
   passport.use(new Auth0Strategy(strategyOptions, verifyCallback));
+
   passport.serializeUser((user, done) => {
     done(null, user);
   });
@@ -116,6 +117,7 @@ exports.authenticateAuth0 = (req, res, next) => {
   const paramsAsString = JSON.stringify(params);
 
   passport.authenticate('auth0', {
+    scope: 'openid email profile',
     state: paramsAsString,
   })(req, res, next);
 };

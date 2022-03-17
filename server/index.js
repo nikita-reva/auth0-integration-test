@@ -42,6 +42,7 @@ const log = require('./log');
 const { sitemapStructure } = require('./sitemap');
 const csp = require('./csp');
 const sdkUtils = require('./api-util/sdk');
+const expressSession = require('express-session');
 
 const buildPath = path.resolve(__dirname, '..', 'build');
 const env = process.env.REACT_APP_ENV;
@@ -80,6 +81,18 @@ app.use(
     contentSecurityPolicy: false,
   })
 );
+
+const session = {
+  secret: process.env.SESSION_SECRET,
+  cookie: {},
+  resave: false,
+  saveUninitialized: false,
+};
+
+if (!useDevApiServer === 'production') {
+  // Serve secure cookies, requires HTTPS
+  session.cookie.secure = true;
+}
 
 if (cspEnabled) {
   // When a CSP directive is violated, the browser posts a JSON body
@@ -158,7 +171,9 @@ if (!dev) {
 // Passport is authentication middleware for Node.js
 // We use passport to enable authenticating with
 // a 3rd party identity provider (e.g. Facebook or Google)
+app.use(expressSession(session));
 app.use(passport.initialize());
+app.use(passport.session());
 
 // Server-side routes that do not render the application
 app.use('/api', apiRouter);
