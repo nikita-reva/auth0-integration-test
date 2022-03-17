@@ -77,6 +77,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
     .then(idpToken => {
       const userData = {
+        ...profile,
         email,
         firstName,
         lastName,
@@ -85,7 +86,7 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
         defaultReturn,
         defaultConfirm,
       };
-      done(null, profile);
+      done(null, userData);
     })
     .catch(e => console.error(e));
 };
