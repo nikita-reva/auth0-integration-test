@@ -76,6 +76,8 @@ module.exports = (req, res) => {
     )
     .then(apiResponse => {
       const { status, statusText, data } = apiResponse;
+      console.log(data);
+
       res
         .clearCookie('st-authinfo')
         .status(status)
