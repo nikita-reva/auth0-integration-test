@@ -50,9 +50,10 @@ exports.createIdToken = (idpClientId, user, options) => {
   // https://github.com/panva/jose/blob/master/docs/types/_types_d_.keylike.md
   const privateKey = crypto.createPrivateKey(rsaPrivateKey);
 
-  const { userId, firstName, lastName, email, emailVerified } = user;
+  const { userId, display_name, firstName, lastName, email, emailVerified } = user;
 
   const jwt = new SignJWT({
+    display_name: display_name,
     given_name: firstName,
     family_name: lastName,
     email: email,
