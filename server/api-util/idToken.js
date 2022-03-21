@@ -53,7 +53,7 @@ exports.createIdToken = (idpClientId, user, options) => {
   const { userId, displayName, firstName, lastName, email, emailVerified } = user;
 
   const jwt = new SignJWT({
-    display_name: displayName,
+    display_name: displayName ? displayName : '',
     given_name: firstName,
     family_name: lastName,
     email: email,
