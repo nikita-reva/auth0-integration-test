@@ -49,8 +49,8 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
 
   const userId = profile.user_id;
   const displayName = profile.displayName;
-  const firstName = '';
-  const lastName = '';
+  const firstName = profile.displayName;
+  const lastName = profile.displayName;
   const email = '';
 
   // LikedIn API doesn't return information if the email is verified or not directly.
@@ -58,46 +58,51 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // There is no official documentation about this, but through testing it seems like this can be trusted
   // For reference: https://stackoverflow.com/questions/19278201/oauth-request-verified-email-address-from-linkedin
 
-  const user = {
-    userId,
-    displayName,
-    firstName,
-    lastName,
-    email,
-    emailVerified: true,
-  };
+  const idpToken = refreshToken.id_token;
 
   const state = req.query.state;
   const queryParams = JSON.parse(state);
 
   const { from, defaultReturn, defaultConfirm } = queryParams;
 
+  const user = {
+    email,
+    firstName,
+    lastName,
+    idpToken,
+    from,
+    defaultReturn,
+    defaultConfirm,
+  };
+
   // These keys are used for signing the ID token (JWT)
   // When you store them to environment variables you should replace
   // any line brakes with '\n'.
   // You should also make sure that the key size is big enough.
-  const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
-  const keyId = process.env.KEY_ID;
+  // const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
+  // const keyId = process.env.KEY_ID;
 
-  createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
-    .then(idpToken => {
-      console.log(idpToken);
+//   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
+//     .then(idpToken => {
+//       console.log(idpToken);
 
-      const userData = {
-        userId,
-        displayName,
-        email,
-        firstName,
-        lastName,
-        idpToken,
-        from,
-        defaultReturn,
-        defaultConfirm,
-      };
-      done(null, userData);
-    })
-    .catch(e => console.error(e));
-};
+//       const userData = {
+//         userId,
+//         displayName,
+//         email,
+//         firstName,
+//         lastName,
+//         idpToken,
+//         from,
+//         defaultReturn,
+//         defaultConfirm,
+//       };
+//       done(null, userData);
+//     })
+//     .catch(e => console.error(e));
+// };
+done(null, user);
+
 
 // ClientId is required when adding a new Linkedin strategy to passport
 if (clientID) {
