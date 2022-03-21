@@ -82,27 +82,26 @@ const verifyCallback = (req, accessToken, extraParams, refreshToken, profile, do
   // const rsaPrivateKey = process.env.RSA_PRIVATE_KEY;
   // const keyId = process.env.KEY_ID;
 
-//   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
-//     .then(idpToken => {
-//       console.log(idpToken);
+  //   createIdToken(idpClientId, user, { signingAlg: 'RS256', rsaPrivateKey, keyId })
+  //     .then(idpToken => {
+  //       console.log(idpToken);
 
-//       const userData = {
-//         userId,
-//         displayName,
-//         email,
-//         firstName,
-//         lastName,
-//         idpToken,
-//         from,
-//         defaultReturn,
-//         defaultConfirm,
-//       };
-//       done(null, userData);
-//     })
-//     .catch(e => console.error(e));
-// };
-done(null, user);
-
+  //       const userData = {
+  //         userId,
+  //         displayName,
+  //         email,
+  //         firstName,
+  //         lastName,
+  //         idpToken,
+  //         from,
+  //         defaultReturn,
+  //         defaultConfirm,
+  //       };
+  //       done(null, userData);
+  //     })
+  //     .catch(e => console.error(e));
+  done(null, user);
+};
 
 // ClientId is required when adding a new Linkedin strategy to passport
 if (clientID) {
